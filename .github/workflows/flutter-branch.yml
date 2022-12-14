@@ -42,10 +42,10 @@ jobs:
       run:
         working-directory: ${{ inputs.working-directory }}
     steps:
-      - uses: QuickBirdEng/actions/checkout-ssh@main
+      - uses: roadsurfer-com/actions/checkout-ssh@main
         with:
           ssh-private-key: ${{ secrets.CI_SSH_PRIVATE_KEY_FOR_GITHUB_PRIVATE_REPOS }}
-      - uses: QuickBirdEng/actions/setup-flutter@main
+      - uses: roadsurfer-com/actions/setup-flutter@main
         with:
           working-directory: ${{ inputs.working-directory }}
       - run: flutter analyze
@@ -56,10 +56,10 @@ jobs:
       run:
         working-directory: ${{ inputs.working-directory }}
     steps:
-      - uses: QuickBirdEng/actions/checkout-ssh@main
+      - uses: roadsurfer-com/actions/checkout-ssh@main
         with:
           ssh-private-key: ${{ secrets.CI_SSH_PRIVATE_KEY_FOR_GITHUB_PRIVATE_REPOS }}
-      - uses: QuickBirdEng/actions/setup-flutter@main
+      - uses: roadsurfer-com/actions/setup-flutter@main
         with:
           working-directory: ${{ inputs.working-directory }}
       - run: flutter test --dart-define STAGE=mock
@@ -68,10 +68,10 @@ jobs:
       runs-on: [self-hosted, Linux]
       needs: [generate-build-number, lint, test]
       steps:
-        - uses: QuickBirdEng/actions/checkout-ssh@main
+        - uses: roadsurfer-com/actions/checkout-ssh@main
           with:
             ssh-private-key: ${{ secrets.CI_SSH_PRIVATE_KEY_FOR_GITHUB_PRIVATE_REPOS }}
-        - uses: QuickBirdEng/actions/setup-android@main
+        - uses: roadsurfer-com/actions/setup-android@main
           with:
             key-store-file-content: ${{ secrets.ANDROID_KEYSTORE_FILE_CONTENT }}
             key-store-password: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
@@ -79,7 +79,7 @@ jobs:
             signing-key-password: ${{ secrets.ANDROID_SIGNING_KEY_PASSWORD }}
             qbs-maven-username: ${{ secrets.QBS_DEV_MAVEN_USERNAME }}
             qbs-maven-password: ${{ secrets.QBS_DEV_MAVEN_PASSWORD }}
-        - uses: QuickBirdEng/actions/flutter-build@main
+        - uses: roadsurfer-com/actions/flutter-build@main
           id: build
           with:
             clean: true
@@ -87,8 +87,8 @@ jobs:
             build-arguments: ${{ inputs.android-build-arguments }}
             build-type: apk
             working-directory: ${{ inputs.working-directory }}
-        - name: "Publishing to apps.quickbirdstudios.com"
-          uses: QuickBirdEng/actions/qb-publish@main
+        - name: "Publishing app"
+          uses: roadsurfer-com/actions/qb-publish@main
           with:
             upload-key: ${{ secrets.UPLOAD_KEY }}
             file: ${{ steps.build.outputs.artifact-path }}
@@ -99,11 +99,11 @@ jobs:
       runs-on: [self-hosted, macOS]
       needs: [generate-build-number, lint, test]
       steps:
-        - uses: QuickBirdEng/actions/checkout-ssh@main
+        - uses: roadsurfer-com/actions/checkout-ssh@main
           with:
             ssh-private-key: ${{ secrets.CI_SSH_PRIVATE_KEY_FOR_GITHUB_PRIVATE_REPOS }}
-        - uses: QuickBirdEng/actions/setup-ios@main
-        - uses: QuickBirdEng/actions/flutter-build@main
+        - uses: roadsurfer-com/actions/setup-ios@main
+        - uses: roadsurfer-com/actions/flutter-build@main
           id: build
           with:
             build-type: ipa
@@ -111,7 +111,7 @@ jobs:
             build-arguments: --no-codesign ${{ inputs.ios-build-arguments }}
             clean: true
             working-directory: ${{ inputs.working-directory }}
-        - uses: QuickBirdEng/actions/publish-ios@main
+        - uses: roadsurfer-com/actions/publish-ios@main
           with:
             apple-auth-key-id: ${{ secrets.APPLE_AUTH_KEY_ID }}
             apple-auth-key-issuer-id: ${{ secrets.APPLE_AUTH_KEY_ISSUER_ID }}
