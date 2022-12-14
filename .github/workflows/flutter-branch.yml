@@ -87,12 +87,6 @@ jobs:
             build-arguments: ${{ inputs.android-build-arguments }}
             build-type: apk
             working-directory: ${{ inputs.working-directory }}
-        - name: "Publishing app"
-          uses: roadsurfer-com/actions/qb-publish@main
-          with:
-            upload-key: ${{ secrets.UPLOAD_KEY }}
-            file: ${{ steps.build.outputs.artifact-path }}
-            working-directory: ${{ inputs.working-directory }}
 
 
   ios-publish:
@@ -117,7 +111,6 @@ jobs:
             apple-auth-key-issuer-id: ${{ secrets.APPLE_AUTH_KEY_ISSUER_ID }}
             apple-auth-key-content: ${{ secrets.APPLE_AUTH_KEY_CONTENT }}
             apple-auth-key-encoding: "base64"
-            upload-key: ${{ secrets.UPLOAD_KEY }}
             publish-to-testflight: ${{ inputs.publish-to-testflight }}
             match-password: ${{ secrets.MATCH_PASSWORD }}
             match-repository: ${{ secrets.MATCH_REPO }}

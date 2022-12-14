@@ -34,8 +34,3 @@ jobs:
         - name: Generate APK
           shell: bash
           run: ./gradlew assembleRelease
-        - name: "Publishing app"
-          uses: roadsurfer-com/actions/qb-publish@main
-          with:
-            upload-key: ${{ secrets.UPLOAD_KEY }}
-            file: app/build/outputs/apk/release/app-release.apk
