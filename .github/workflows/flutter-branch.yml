@@ -42,9 +42,9 @@ jobs:
       run:
         working-directory: ${{ inputs.working-directory }}
     steps:
-      - uses: roadsurfer-com/actions/checkout-ssh@main
-        with:
-          ssh-private-key: ${{ secrets.CI_SSH_PRIVATE_KEY_FOR_GITHUB_PRIVATE_REPOS }}
+#      - uses: roadsurfer-com/actions/checkout-ssh@main
+#        with:
+#          ssh-private-key: ${{ secrets.CI_SSH_PRIVATE_KEY_FOR_GITHUB_PRIVATE_REPOS }}
       - uses: roadsurfer-com/actions/setup-flutter@main
         with:
           working-directory: ${{ inputs.working-directory }}
@@ -56,9 +56,9 @@ jobs:
       run:
         working-directory: ${{ inputs.working-directory }}
     steps:
-      - uses: roadsurfer-com/actions/checkout-ssh@main
-        with:
-          ssh-private-key: ${{ secrets.CI_SSH_PRIVATE_KEY_FOR_GITHUB_PRIVATE_REPOS }}
+#      - uses: roadsurfer-com/actions/checkout-ssh@main
+#        with:
+#          ssh-private-key: ${{ secrets.CI_SSH_PRIVATE_KEY_FOR_GITHUB_PRIVATE_REPOS }}
       - uses: roadsurfer-com/actions/setup-flutter@main
         with:
           working-directory: ${{ inputs.working-directory }}
@@ -68,9 +68,9 @@ jobs:
       runs-on: [self-hosted, Linux]
       needs: [generate-build-number, lint, test]
       steps:
-        - uses: roadsurfer-com/actions/checkout-ssh@main
-          with:
-            ssh-private-key: ${{ secrets.CI_SSH_PRIVATE_KEY_FOR_GITHUB_PRIVATE_REPOS }}
+#        - uses: roadsurfer-com/actions/checkout-ssh@main
+#          with:
+#            ssh-private-key: ${{ secrets.CI_SSH_PRIVATE_KEY_FOR_GITHUB_PRIVATE_REPOS }}
         - uses: roadsurfer-com/actions/setup-android@main
           with:
             key-store-file-content: ${{ secrets.ANDROID_KEYSTORE_FILE_CONTENT }}
@@ -99,9 +99,9 @@ jobs:
       runs-on: [self-hosted, macOS]
       needs: [generate-build-number, lint, test]
       steps:
-        - uses: roadsurfer-com/actions/checkout-ssh@main
-          with:
-            ssh-private-key: ${{ secrets.CI_SSH_PRIVATE_KEY_FOR_GITHUB_PRIVATE_REPOS }}
+#        - uses: roadsurfer-com/actions/checkout-ssh@main
+#          with:
+#            ssh-private-key: ${{ secrets.CI_SSH_PRIVATE_KEY_FOR_GITHUB_PRIVATE_REPOS }}
         - uses: roadsurfer-com/actions/setup-ios@main
         - uses: roadsurfer-com/actions/flutter-build@main
           id: build
